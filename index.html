@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winnie Kaniz Furnished Apartments | Luxury Short-Stay in Bugolobi, Kampala</title>
+    <meta name="description" content="Experience premium luxury at Winnie Kaniz Furnished Apartments in Bugolobi, Kampala. Modern, fully equipped apartments for short and long stays. Comfort Redefined.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Winnie Kaniz Furnished Apartments | Luxury Short-Stay in Kampala">
+    <meta property="og:description" content="Modern living meets timeless elegance. Premium furnished apartments in the heart of Bugolobi.">
+    <meta property="og:image" content="assets/images/logo.webp">
+    <meta property="og:url" content="https://winniekaniz.com">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Libraries CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LodgingBusiness",
+      "name": "Winnie Kaniz Furnished Apartments",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Bugolobi",
+        "addressLocality": "Kampala",
+        "addressCountry": "Uganda"
+      },
+      "telephone": "+256788661755",
+      "email": "Winniekaniz2026@yahoo.com",
+      "starRating": {
+        "@type": "Rating",
+        "ratingValue": "5"
+      }
+    }
+    </script>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <ul class="nav-links left-nav" id="navLinksLeft">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#apartments">Residences</a></li>
+                </ul>
+
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.webp" alt="Winnie Kaniz Logo">
+                </a>
+
+                <ul class="nav-links right-nav" id="navLinksRight">
+                    <li><a href="#amenities">Amenities</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li class="nav-cta-li"><a href="#apartments" class="btn-book-header">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-container">
+        <div class="hero-video-wrapper">
+            <video autoplay muted loop playsinline poster="assets/images/apt1/3B3A0065-HDR.webp" class="hero-video">
+                <source src="assets/videos/apt1-tour.mp4" type="video/mp4">
+            </video>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="accent-line" data-aos="fade-down" style="margin-bottom: 24px;"></div>
+                <p class="subheading" data-aos="fade-up" data-aos-delay="200">Comfort Redefined</p>
+                <h1 data-aos="fade-up" data-aos-delay="400">Where Modern Living Meets Timeless Elegance</h1>
+                <p class="description" data-aos="fade-up" data-aos-delay="600">Premium furnished apartments in Bugolobi, fully equipped for your lifestyle.</p>
+            </div>
+        </div>
+        
+        <!-- Booking Bar -->
+        <div class="booking-bar" data-aos="fade-up" data-aos-offset="0">
+            <div class="container">
+                <form class="booking-form" id="availabilityForm">
+                    <div class="booking-field">
+                        <label for="checkIn">Check-In</label>
+                        <input type="date" id="checkIn" name="checkIn">
+                    </div>
+                    <div class="booking-field">
+                        <label for="checkOut">Check-Out</label>
+                        <input type="date" id="checkOut" name="checkOut">
+                    </div>
+                    <div class="booking-field">
+                        <label for="apartmentSelect">Apartment</label>
+                        <select id="apartmentSelect" name="apartment">
+                            <option value="classic">The Classic Suite</option>
+                            <option value="premier">The Premier Residence</option>
+                            <option value="executive">The Executive Retreat</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-gold" id="availBtn">
+                        <span id="availBtnText">Check Availability</span>
+                        <span id="availBtnSpinner" style="display:none;">
+                            <svg width="18" height="18" viewBox="0 0 38 38" stroke="#fff" style="vertical-align:middle;animation:spin 0.8s linear infinite;">
+                                <g fill="none" fill-rule="evenodd"><g transform="translate(1 1)" stroke-width="3">
+                                    <circle stroke-opacity=".4" cx="18" cy="18" r="18"/>
+                                    <path d="M36 18c0-9.94-8.06-18-18-18"/>
+                                </g></g>
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+
+                <!-- Result card -->
+                <div id="availResult" style="display:none;" class="avail-result-card">
+                    <div class="avail-status" id="availStatus"></div>
+                    <div class="avail-pricing" id="availPricing"></div>
+                    <a id="availBookBtn" href="#" target="_blank" rel="noopener" class="btn btn-gold avail-book-btn" style="display:none;">
+                        Book on Airbnb
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section id="stats" class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 data-target="3">0</h3>
+                    <p>Luxury Residences</p>
+                </div>
+                <div class="stat-item">
+                    <h3 data-target="5">0</h3>
+                    <p>Star Airbnb Rating</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Bugolobi</h3>
+                    <p>Prime Location</p>
+                </div>
+                <div class="stat-item">
+                    <h3>24/7</h3>
+                    <p>Power Backup</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Introduction -->
+    <section id="about" class="section-padding">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-text" data-aos="fade-right">
+                    <h2>The Winnie Kaniz Experience</h2>
+                    <div class="accent-line" style="margin: 0 0 28px 0;"></div>
+                    <p>At Winnie Kaniz, we believe your living space should be a sanctuary. Each of our three furnished apartments has been meticulously designed with stylish furnishings, warm textures, and all the conveniences of home.</p>
+                    <blockquote>"It's not just where you stay — it's how you feel."</blockquote>
+                    <p>Whether you're a business executive, a diplomat, or a leisure traveler, we provide a private urban retreat where every detail tells a story of comfort and sophistication.</p>
+                </div>
+                <div class="intro-img" data-aos="fade-left">
+                    <img src="assets/images/apt1/3B3A0065-HDR.webp" alt="Winnie Kaniz Interior">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apartments Showcase -->
+    <section id="apartments" class="section-padding" style="background-color: var(--light-grey);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Our Residences</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="residences-grid">
+                <!-- Apartment 1 -->
+                <div class="residence-card" data-aos="fade-up">
+                    <div class="residence-img">
+                        <img src="assets/images/apt1/3B3A0153.webp" alt="The Classic Suite">
+                        <div class="residence-badge">Apartment 1</div>
+                    </div>
+                    <div class="residence-content">
+                        <h3>The Classic Suite</h3>
+                        <p>A beautifully furnished retreat featuring 24-hour standby power, cozy bedding, and a contemporary kitchen. Perfect for solo travelers and couples.</p>
+                        <span class="residence-price"><span>From</span> $120 <span>/ Night</span></span>
+                        <div class="residence-btns">
+                            <a href="apartments/apartment-1.html" class="btn btn-outline">Details</a>
+                            <a href="https://www.airbnb.com/rooms/1542437708058109816" target="_blank" class="btn btn-gold">Book ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apartment 2 -->
+                <div class="residence-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="residence-img">
+                        <img src="assets/images/apt2/3B3A0298.webp" alt="The Premier Residence">
+                        <div class="residence-badge">Apartment 2</div>
+                    </div>
+                    <div class="residence-content">
+                        <h3>The Premier Residence</h3>
+                        <p>Spacious 2-bedroom apartment with a 55-inch screen and sound system. Ideal for business travelers and families seeking sophistication.</p>
+                        <span class="residence-price"><span>From</span> $180 <span>/ Night</span></span>
+                        <div class="residence-btns">
+                            <a href="apartments/apartment-2.html" class="btn btn-outline">Details</a>
+                            <a href="https://www.airbnb.com/rooms/1674038645436000786" target="_blank" class="btn btn-gold">Book ↗</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Apartment 3 -->
+                <div class="residence-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="residence-img">
+                        <img src="assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.44.webp" alt="The Executive Retreat">
+                        <div class="residence-badge">Apartment 3</div>
+                    </div>
+                    <div class="residence-content">
+                        <h3>The Executive Retreat</h3>
+                        <p>A refined luxury apartment with a private backyard and Bluetooth sound system. Your private urban retreat in the heart of Bugolobi.</p>
+                        <span class="residence-price"><span>From</span> $250 <span>/ Night</span></span>
+                        <div class="residence-btns">
+                            <a href="apartments/apartment-3.html" class="btn btn-outline">Details</a>
+                            <a href="https://www.airbnb.com/rooms/1674021824983862337" target="_blank" class="btn btn-gold">Book ↗</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section id="amenities" class="section-padding amenities-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Curated for Your Comfort</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="amenities-grid">
+                <div class="amenity-item" data-aos="fade-up">
+                    <div class="amenity-icon"><i class="fas fa-couch"></i></div>
+                    <p>Stylish Furnishings</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="amenity-icon"><i class="fas fa-utensils"></i></div>
+                    <p>Equipped Kitchen</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="amenity-icon"><i class="fas fa-wifi"></i></div>
+                    <p>High-Speed WiFi</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="amenity-icon"><i class="fas fa-bolt"></i></div>
+                    <p>Power Backup</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="amenity-icon"><i class="fas fa-tv"></i></div>
+                    <p>55" Smart TV</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="amenity-icon"><i class="fas fa-shield-halved"></i></div>
+                    <p>Secure Building</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="amenity-icon"><i class="fas fa-bath"></i></div>
+                    <p>Private En-suite</p>
+                </div>
+                <div class="amenity-item" data-aos="fade-up" data-aos-delay="700">
+                    <div class="amenity-icon"><i class="fas fa-location-dot"></i></div>
+                    <p>Prime Bugolobi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>A Glimpse Inside</h2>
+                <div class="accent-line"></div>
+            </div>
+            <div class="gallery-grid">
+                <a href="assets/images/apt1/3B3A0140.webp" class="glightbox gallery-item" data-aos="zoom-in">
+                    <img src="assets/images/apt1/3B3A0140.webp" alt="Gallery Image 1" loading="lazy">
+                </a>
+                <a href="assets/images/apt1/3B3A0153.webp" class="glightbox gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="assets/images/apt1/3B3A0153.webp" alt="Gallery Image 2" loading="lazy">
+                </a>
+                <a href="assets/images/apt2/3B3A0348.webp" class="glightbox gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="assets/images/apt2/3B3A0348.webp" alt="Gallery Image 3" loading="lazy">
+                </a>
+                <a href="assets/images/apt2/3B3A0396-Enhanced-NR.webp" class="glightbox gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="assets/images/apt2/3B3A0396-Enhanced-NR.webp" alt="Gallery Image 4" loading="lazy">
+                </a>
+                <a href="assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.05.webp" class="glightbox gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.05.webp" alt="Gallery Image 5" loading="lazy">
+                </a>
+                <a href="assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.44.webp" class="glightbox gallery-item" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.44.webp" alt="Gallery Image 6" loading="lazy">
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section-padding testimonials-section">
+        <div class="container">
+            <div class="testimonial-card" data-aos="fade-up">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <div class="testimonial-text">
+                    "Clean, tidy, and very comfortable. The location in Bugolobi is very convenient for accessing Kampala. Great location and well maintained apartment with fast internet."
+                </div>
+                <div class="testimonial-author">— Verified Airbnb Guest</div>
+                <div class="testimonial-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking CTA Banner -->
+    <section class="booking-banner">
+        <div class="container">
+            <h2 data-aos="fade-up">Your Perfect Stay Awaits</h2>
+            <p data-aos="fade-up" data-aos-delay="200">Ready to experience "Comfort Redefined" in Kampala? Reserve your residence today.</p>
+            <div data-aos="fade-up" data-aos-delay="400">
+                <a href="https://www.airbnb.com/users/profile/1542437708667385677?previous_page_name=PdpHomeMarketplace" target="_blank" class="btn btn-gold">View All on Airbnb</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info-card" data-aos="fade-right">
+                    <h2>Get in Touch</h2>
+                    <div class="accent-line" style="margin: 0 0 36px 0;"></div>
+                    
+                    <div class="contact-item">
+                        <h4>Location</h4>
+                        <p>Bugolobi, Kampala, Uganda</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>WhatsApp / Phone</h4>
+                        <p>+256 788 661 755</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <h4>Email</h4>
+                        <p>Winniekaniz2026@yahoo.com</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <h4>Follow Us</h4>
+                        <a href="https://www.tiktok.com/@winnie.kaniz" target="_blank" style="font-size: 1.3rem; color: var(--accent-gold-light); margin-right: 12px;"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://www.instagram.com/kaniz_apartments" target="_blank" style="font-size: 1.3rem; color: var(--accent-gold-light);"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form" data-aos="fade-left">
+                    <form action="#">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Apartment</label>
+                            <select>
+                                <option>The Classic Suite (Apt 1)</option>
+                                <option>The Premier Residence (Apt 2)</option>
+                                <option>The Executive Retreat (Apt 3)</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea rows="5" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/logo.webp" alt="Winnie Kaniz Logo">
+                    </div>
+                    <p>Winnie Kaniz Furnished Apartments – Comfort Redefined. Providing premium short and long-stay residences in the heart of Kampala.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#apartments">Our Residences</a></li>
+                        <li><a href="#amenities">Amenities</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Bugolobi, Kampala, Uganda</li>
+                        <li><i class="fas fa-phone"></i> +256 788 661 755</li>
+                        <li><i class="fas fa-envelope"></i> Winniekaniz2026@yahoo.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Winnie Kaniz Furnished Apartments. All rights reserved. | Bugolobi, Kampala, Uganda
+                <span class="made-by">Made by <a href="https://blactec.ug" target="_blank">Blactec.ug</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/256788661755?text=Hello%2C%20I%27m%20interested%20in%20booking%20a%20Winnie%20Kaniz%20Furnished%20Apartment" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

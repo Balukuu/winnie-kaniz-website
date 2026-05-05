@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Executive Retreat | Winnie Kaniz Furnished Apartments</title>
+    <meta name="description" content="2-bedroom luxury furnished apartment with private backyard in Bugolobi, Kampala. 55-inch Smart TV, Bluetooth sound system, en-suite master. Book on Airbnb.">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        /* ── Reset / base ── */
+        body { background: #fff; }
+
+        /* ── Photo grid ── */
+        .photo-section { margin-top: 130px; }
+        .photo-grid-wrap { position: relative; }
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 300px 300px;
+            gap: 5px;
+        }
+        .photo-grid .main-photo {
+            grid-row: 1 / 3;
+            overflow: hidden; cursor: pointer;
+        }
+        .photo-grid .sub-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 5px;
+        }
+        .photo-grid .sub-photo { overflow: hidden; cursor: pointer; }
+        .photo-grid img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.45s ease; display: block;
+        }
+        .photo-grid .main-photo:hover img,
+        .photo-grid .sub-photo:hover img { transform: scale(1.04); }
+        .show-all-btn {
+            position: absolute; bottom: 18px; right: 18px;
+            background: #fff; border: 1.5px solid #222; color: #222;
+            padding: 9px 18px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 0.1em; text-transform: uppercase; border-radius: 5px;
+            cursor: pointer; transition: all 0.3s; z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+        }
+        .show-all-btn:hover { background: #222; color: #fff; }
+
+        /* ── Listing header ── */
+        .listing-header { padding: 40px 0 0; border-bottom: 1px solid #ebebeb; }
+        .breadcrumb { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: underline; }
+        .breadcrumb a:hover { color: var(--text-dark); }
+        .listing-title {
+            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            font-weight: 600; color: var(--text-dark); margin-bottom: 14px;
+        }
+        .listing-meta {
+            display: flex; flex-wrap: wrap; align-items: center;
+            gap: 6px 20px; margin-bottom: 22px;
+        }
+        .listing-meta .meta-item {
+            display: flex; align-items: center; gap: 7px;
+            font-size: 0.88rem; color: var(--text-muted);
+        }
+        .listing-meta .meta-item i { color: var(--accent-gold); font-size: 0.85rem; }
+        .listing-meta .meta-sep { color: #ddd; }
+        .listing-meta .meta-rating { font-weight: 700; color: var(--text-dark); }
+        .listing-meta .meta-rating i { color: #e8472a; }
+
+        /* ── Two-column body ── */
+        .listing-body {
+            display: grid;
+            grid-template-columns: 1fr 370px;
+            gap: 72px;
+            padding: 44px 0 100px;
+            align-items: start;
+        }
+
+        /* ── Left content ── */
+        .host-strip {
+            display: flex; align-items: center; gap: 18px;
+            padding: 32px 0; border-bottom: 1px solid #ebebeb;
+        }
+        .host-avatar {
+            width: 54px; height: 54px; border-radius: 50%;
+            background: var(--accent-gold); color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; flex-shrink: 0;
+        }
+        .host-name { font-weight: 700; font-size: 0.98rem; color: var(--text-dark); }
+        .host-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; }
+
+        .section { padding: 36px 0; border-bottom: 1px solid #ebebeb; }
+        .section:last-child { border-bottom: none; }
+        .section h2 {
+            font-family: 'Playfair Display', serif; font-size: 1.45rem;
+            font-weight: 600; margin-bottom: 18px; color: var(--text-dark);
+        }
+        .section p { font-size: 0.94rem; line-height: 1.85; color: #444; margin-bottom: 14px; }
+        .section p:last-child { margin-bottom: 0; }
+
+        /* Highlights */
+        .highlights { display: flex; flex-direction: column; gap: 20px; }
+        .highlight {
+            display: flex; align-items: flex-start; gap: 16px;
+        }
+        .highlight > i { font-size: 1.2rem; color: var(--text-dark); width: 22px; flex-shrink: 0; margin-top: 2px; }
+        .highlight .hl-title { font-weight: 600; font-size: 0.93rem; color: var(--text-dark); }
+        .highlight .hl-sub { font-size: 0.83rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* Sleeping */
+        .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 18px; }
+        .room-card { border: 1px solid #e4e4e4; border-radius: 10px; overflow: hidden; transition: box-shadow 0.3s; }
+        .room-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.09); }
+        .room-card img { width: 100%; height: 150px; object-fit: cover; display: block; cursor: pointer; }
+        .room-body { padding: 14px 16px; }
+        .room-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 3px; }
+        .room-name { font-weight: 700; font-size: 0.93rem; color: var(--text-dark); }
+        .room-beds { font-size: 0.83rem; color: var(--text-muted); margin-top: 5px; display: flex; align-items: center; gap: 6px; }
+        .room-beds i { color: var(--accent-gold); }
+
+        /* Amenities */
+        .amenities-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 15px 28px; margin-top: 20px;
+        }
+        .amenity {
+            display: flex; align-items: center; gap: 13px;
+            font-size: 0.91rem; color: #333;
+        }
+        .amenity i { color: var(--text-dark); font-size: 1.05rem; width: 20px; flex-shrink: 0; }
+
+        /* House rules */
+        .rules-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 14px 28px; margin-top: 18px;
+        }
+        .rule { display: flex; align-items: center; gap: 11px; font-size: 0.91rem; color: #333; }
+        .rule i { width: 18px; flex-shrink: 0; color: var(--accent-gold); }
+        .rule.no i { color: #c0392b; }
+        .policy-box {
+            margin-top: 24px; padding: 18px 22px;
+            background: #fafaf8; border: 1px solid #ebebeb; border-radius: 8px;
+        }
+        .policy-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 7px; }
+        .policy-box p { font-size: 0.87rem; color: #555; margin: 0; line-height: 1.7; }
+        .policy-box a { color: var(--accent-gold); text-decoration: underline; }
+
+        /* Location */
+        .location-tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+        .location-tag {
+            display: flex; align-items: center; gap: 7px;
+            background: #f5f5f5; border: 1px solid #e8e8e8;
+            border-radius: 20px; padding: 6px 14px;
+            font-size: 0.81rem; color: #444;
+        }
+        .location-tag i { color: var(--accent-gold); font-size: 0.8rem; }
+        .map-wrap {
+            margin-top: 18px; border-radius: 10px; overflow: hidden;
+            border: 1px solid #e8e8e8; height: 280px;
+        }
+        .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+        /* ── Booking sidebar ── */
+        .booking-sidebar {
+            position: sticky; top: 115px;
+            background: #fff; border: 1px solid #ddd;
+            border-radius: 14px; padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+        .sb-price { font-size: 1.45rem; font-weight: 700; color: var(--text-dark); }
+        .sb-price span { font-size: 0.88rem; font-weight: 400; color: var(--text-muted); }
+        .sb-rating { font-size: 0.83rem; color: var(--text-muted); margin: 5px 0 22px; }
+        .sb-rating strong { color: var(--text-dark); }
+        .sb-rating i { color: #e8472a; }
+        .sb-dates {
+            display: grid; grid-template-columns: 1fr 1fr;
+            border: 1.5px solid #ddd; border-radius: 9px;
+            overflow: hidden; margin-bottom: 10px;
+        }
+        .sb-date {
+            padding: 11px 13px; border-right: 1px solid #ddd;
+        }
+        .sb-date:last-child { border-right: none; }
+        .sb-date label {
+            display: block; font-size: 0.65rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px;
+            color: var(--text-dark);
+        }
+        .sb-date input {
+            border: none; outline: none; width: 100%;
+            font-size: 0.88rem; font-family: 'Inter', sans-serif;
+            cursor: pointer; color: var(--text-dark);
+        }
+        .sb-guests {
+            border: 1.5px solid #ddd; border-radius: 9px;
+            padding: 11px 13px; margin-bottom: 14px;
+        }
+        .sb-guests label {
+            display: block; font-size: 0.65rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px;
+            color: var(--text-dark);
+        }
+        .sb-guests select {
+            border: none; outline: none; width: 100%;
+            font-size: 0.88rem; font-family: 'Inter', sans-serif;
+            color: var(--text-dark); cursor: pointer;
+        }
+        .sb-btn {
+            width: 100%; padding: 15px; border: none; border-radius: 9px;
+            background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+            color: #fff; font-size: 0.88rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.12em;
+            cursor: pointer; transition: all 0.3s;
+            box-shadow: 0 4px 18px rgba(172,137,62,0.38);
+            margin-bottom: 10px;
+        }
+        .sb-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(172,137,62,0.52); }
+        .sb-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 18px; }
+        .sb-breakdown { border-top: 1px solid #ebebeb; padding-top: 16px; display: none; }
+        .sb-row {
+            display: flex; justify-content: space-between;
+            font-size: 0.87rem; margin-bottom: 9px; color: #444;
+        }
+        .sb-row.total {
+            border-top: 1px solid #ebebeb; padding-top: 12px; margin-top: 4px;
+            font-weight: 700; font-size: 0.94rem; color: var(--text-dark);
+        }
+        .sb-whatsapp {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; margin-top: 12px; padding: 12px;
+            border: 1.5px solid #25d366; border-radius: 9px;
+            color: #25d366; font-size: 0.84rem; font-weight: 600;
+            text-decoration: none; transition: all 0.3s;
+        }
+        .sb-whatsapp:hover { background: #25d366; color: #fff; }
+
+        /* ── Also Like ── */
+        .also-like { background: #f9f8f6; padding: 80px 0; }
+        .also-like .section-title {
+            text-align: center; font-family: 'Playfair Display', serif;
+            font-size: 2rem; margin-bottom: 8px;
+        }
+        .also-like .accent-line { margin: 0 auto 46px; }
+        .also-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        .also-card {
+            background: #fff; border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .also-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
+        .also-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        .also-card-body { padding: 22px 24px 26px; }
+        .also-card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 8px; }
+        .also-card-body p { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.65; }
+
+        /* ── Responsive ── */
+        @media (max-width: 1100px) {
+            .listing-body { grid-template-columns: 1fr; gap: 0; }
+            .booking-sidebar { position: static; margin-top: 48px; max-width: 480px; }
+        }
+        @media (max-width: 768px) {
+            .photo-grid { grid-template-columns: 1fr; grid-template-rows: 260px 130px; }
+            .photo-grid .main-photo { grid-row: auto; }
+            .photo-grid .sub-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+            .photo-grid .sub-grid .sub-photo:nth-child(n+3) { display: none; }
+            .listing-title { font-size: 1.65rem; }
+            .rooms-grid { grid-template-columns: 1fr 1fr; }
+            .amenities-grid { grid-template-columns: 1fr; }
+            .rules-grid { grid-template-columns: 1fr; }
+            .also-cards { grid-template-columns: 1fr; }
+            .listing-meta { gap: 6px 14px; }
+        }
+        @media (max-width: 480px) {
+            .rooms-grid { grid-template-columns: 1fr; }
+            .photo-grid { grid-template-rows: 220px 110px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <ul class="nav-links left-nav" id="navLinksLeft">
+                    <li><a href="../index.html#home">Home</a></li>
+                    <li><a href="../index.html#about">About</a></li>
+                    <li><a href="../index.html#apartments">Residences</a></li>
+                </ul>
+
+                <a href="../index.html" class="logo">
+                    <img src="../assets/images/logo.webp" alt="Winnie Kaniz Logo">
+                </a>
+
+                <ul class="nav-links right-nav" id="navLinksRight">
+                    <li><a href="../index.html#amenities">Amenities</a></li>
+                    <li><a href="../index.html#gallery">Gallery</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                    <li class="nav-cta-li"><a href="../index.html#apartments" class="btn-book-header">Book Now</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ── Photo Grid ── -->
+    <div class="photo-section">
+        <div class="container">
+            <div class="photo-grid-wrap">
+                <div class="photo-grid">
+                    <div class="main-photo" onclick="openGallery(0)">
+                        <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.44.webp" alt="Living Room">
+                    </div>
+                    <div class="sub-grid">
+                        <div class="sub-photo" onclick="openGallery(3)">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.01.webp" alt="Master Bedroom">
+                        </div>
+                        <div class="sub-photo" onclick="openGallery(8)">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.05.webp" alt="Interior">
+                        </div>
+                        <div class="sub-photo" onclick="openGallery(14)">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.12.webp" alt="Interior">
+                        </div>
+                        <div class="sub-photo" onclick="openGallery(23)">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.12.webp" alt="Backyard">
+                        </div>
+                    </div>
+                </div>
+                <button class="show-all-btn" onclick="openGallery(0)">
+                    <i class="fas fa-th" style="margin-right:6px;"></i> Show all photos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Listing Header ── -->
+    <div class="container">
+        <div class="listing-header">
+            <p class="breadcrumb">
+                <a href="../index.html">Home</a> &rsaquo;
+                <a href="../index.html#apartments">Residences</a> &rsaquo;
+                The Executive Retreat
+            </p>
+            <h1 class="listing-title">The Executive Retreat</h1>
+            <div class="listing-meta">
+                <span class="meta-item meta-rating">
+                    <i class="fas fa-star"></i> 4.9
+                </span>
+                <span class="meta-sep">·</span>
+                <span class="meta-item">
+                    <a href="https://www.airbnb.com/rooms/1674021824983862337" target="_blank" style="text-decoration:underline;color:var(--text-muted);">View on Airbnb</a>
+                </span>
+                <span class="meta-sep">·</span>
+                <span class="meta-item"><i class="fas fa-door-open"></i> Entire apartment</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-item"><i class="fas fa-users"></i> Up to 4 guests</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-item"><i class="fas fa-bed"></i> 2 bedrooms</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-item"><i class="fas fa-bath"></i> 2 bathrooms</span>
+                <span class="meta-sep">·</span>
+                <span class="meta-item"><i class="fas fa-map-marker-alt"></i> Bugolobi, Kampala</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Main Body ── -->
+    <div class="container">
+        <div class="listing-body">
+
+            <!-- LEFT: Content -->
+            <div>
+
+                <!-- Host -->
+                <div class="host-strip">
+                    <div class="host-avatar"><i class="fas fa-user"></i></div>
+                    <div>
+                        <div class="host-name">Hosted by Winnie Kaniz</div>
+                        <div class="host-sub">Superhost &middot; 3 years hosting &middot; Bugolobi, Kampala</div>
+                    </div>
+                </div>
+
+                <!-- Highlights -->
+                <div class="section">
+                    <div class="highlights">
+                        <div class="highlight">
+                            <i class="fas fa-tree"></i>
+                            <div>
+                                <div class="hl-title">Private backyard — exclusive to this apartment</div>
+                                <div class="hl-sub">Your own outdoor space for quiet mornings or relaxing evenings.</div>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-tv"></i>
+                            <div>
+                                <div class="hl-title">55-inch Smart TV &amp; Bluetooth sound system</div>
+                                <div class="hl-sub">Premium entertainment for both leisure and business.</div>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-bath"></i>
+                            <div>
+                                <div class="hl-title">Master bedroom with private en-suite bathroom</div>
+                                <div class="hl-sub">Ultimate privacy and comfort for the master suite.</div>
+                            </div>
+                        </div>
+                        <div class="highlight">
+                            <i class="fas fa-plane-arrival"></i>
+                            <div>
+                                <div class="hl-title">Free airport transfer for stays of 7+ nights</div>
+                                <div class="hl-sub">Complimentary pickup from Entebbe International Airport.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About -->
+                <div class="section">
+                    <h2>About the Space</h2>
+                    <p>Welcome to The Executive Retreat — a refined luxury apartment designed for discerning guests who value privacy, style, and space. This 2-bedroom residence features contemporary interiors and premium furnishings that create a serene atmosphere from the moment you arrive.</p>
+                    <p>What sets this apartment apart is its <strong>private backyard</strong> — an exclusive outdoor space perfect for quiet mornings with coffee, evening sundowners, or simply unwinding in fresh air. The master bedroom comes with a <strong>private en-suite bathroom</strong> for ultimate comfort and privacy.</p>
+                    <p>Equipped with a <strong>55-inch Smart TV and Bluetooth sound system</strong>, this apartment caters to both your leisure and professional needs. Located in the heart of Bugolobi, you are surrounded by Kampala's finest dining, shopping, and entertainment options.</p>
+                </div>
+
+                <!-- Sleeping Arrangements -->
+                <div class="section">
+                    <h2>Sleeping Arrangements</h2>
+                    <p style="color:var(--text-muted);font-size:0.85rem;">2 bedrooms &middot; Up to 4 guests</p>
+                    <div class="rooms-grid">
+                        <div class="room-card" data-aos="fade-up">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.01.webp" alt="Master Bedroom" onclick="openGallery(3)" style="cursor:pointer;">
+                            <div class="room-body">
+                                <div class="room-label">Bedroom 1</div>
+                                <div class="room-name">Master Bedroom</div>
+                                <div class="room-beds"><i class="fas fa-bed"></i> 1 king bed &middot; En-suite bath</div>
+                            </div>
+                        </div>
+                        <div class="room-card" data-aos="fade-up" data-aos-delay="100">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.04 (2).webp" alt="Guest Bedroom" onclick="openGallery(7)" style="cursor:pointer;">
+                            <div class="room-body">
+                                <div class="room-label">Bedroom 2</div>
+                                <div class="room-name">Guest Bedroom</div>
+                                <div class="room-beds"><i class="fas fa-bed"></i> 1 double bed</div>
+                            </div>
+                        </div>
+                        <div class="room-card" data-aos="fade-up" data-aos-delay="200">
+                            <img src="../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.05.webp" alt="Living Room" onclick="openGallery(8)" style="cursor:pointer;">
+                            <div class="room-body">
+                                <div class="room-label">Common Space</div>
+                                <div class="room-name">Living Room</div>
+                                <div class="room-beds"><i class="fas fa-tv"></i> 55" Smart TV &middot; Bluetooth audio</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amenities -->
+                <div class="section">
+                    <h2>What This Place Offers</h2>
+                    <div class="amenities-grid">
+                        <div class="amenity"><i class="fas fa-tree"></i> Private backyard</div>
+                        <div class="amenity"><i class="fas fa-tv"></i> 55-inch Smart TV</div>
+                        <div class="amenity"><i class="fas fa-bluetooth"></i> Bluetooth sound system</div>
+                        <div class="amenity"><i class="fas fa-wifi"></i> High-speed WiFi</div>
+                        <div class="amenity"><i class="fas fa-bolt"></i> 24-hr power backup</div>
+                        <div class="amenity"><i class="fas fa-snowflake"></i> Air conditioning</div>
+                        <div class="amenity"><i class="fas fa-car"></i> Free parking on premises</div>
+                        <div class="amenity"><i class="fas fa-soap"></i> In-unit washer</div>
+                        <div class="amenity"><i class="fas fa-utensils"></i> Fully equipped kitchen</div>
+                        <div class="amenity"><i class="fas fa-bath"></i> Master en-suite bathroom</div>
+                        <div class="amenity"><i class="fas fa-fire-burner"></i> Gas stove &amp; oven</div>
+                        <div class="amenity"><i class="fas fa-mug-hot"></i> Kettle &amp; microwave</div>
+                        <div class="amenity"><i class="fas fa-shirt"></i> Iron &amp; ironing board</div>
+                        <div class="amenity"><i class="fas fa-shield-halved"></i> 24/7 security staff</div>
+                        <div class="amenity"><i class="fas fa-water"></i> Hot water</div>
+                        <div class="amenity"><i class="fas fa-plane-arrival"></i> Free airport transfer (7+ nights)</div>
+                    </div>
+                </div>
+
+                <!-- House Rules -->
+                <div class="section">
+                    <h2>House Rules</h2>
+                    <div class="rules-grid">
+                        <div class="rule"><i class="fas fa-right-to-bracket"></i> Check-in: 1:00 PM – 12:00 AM</div>
+                        <div class="rule"><i class="fas fa-right-from-bracket"></i> Checkout: before 11:00 AM</div>
+                        <div class="rule"><i class="fas fa-users"></i> Maximum 4 guests</div>
+                        <div class="rule"><i class="fas fa-smoking"></i> Smoking allowed</div>
+                        <div class="rule no"><i class="fas fa-paw"></i> No pets allowed</div>
+                        <div class="rule"><i class="fas fa-camera"></i> Commercial photography allowed</div>
+                    </div>
+                    <div class="policy-box">
+                        <h3>Cancellation Policy</h3>
+                        <p>Free cancellation before check-in. Review the full cancellation policy on <a href="https://www.airbnb.com/rooms/1674021824983862337" target="_blank">Airbnb</a>.</p>
+                    </div>
+                </div>
+
+                <!-- Location -->
+                <div class="section">
+                    <h2>Location</h2>
+                    <p>Bugolobi, Kampala, Uganda — one of the city's most vibrant and well-connected neighborhoods.</p>
+                    <div class="location-tags">
+                        <span class="location-tag"><i class="fas fa-store"></i> Village Mall — 5 min walk</span>
+                        <span class="location-tag"><i class="fas fa-shopping-cart"></i> Jazz Supermarket — 5 min walk</span>
+                        <span class="location-tag"><i class="fas fa-utensils"></i> Shaka Zulu — nearby</span>
+                        <span class="location-tag"><i class="fas fa-plane"></i> Entebbe Airport — 45 min</span>
+                        <span class="location-tag"><i class="fas fa-city"></i> City Centre — 10 min drive</span>
+                        <span class="location-tag"><i class="fas fa-hospital"></i> IHK Hospital — 5 min</span>
+                    </div>
+                    <div class="map-wrap">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7556418!2d32.6121!3d0.3150!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb45f87b5d53%3A0x6d7c9bb97b8f9ec0!2sBugolobi%2C%20Kampala%2C%20Uganda!5e0!3m2!1sen!2sug!4v1683000000000!5m2!1sen!2sug"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+            </div><!-- end left -->
+
+            <!-- RIGHT: Booking Sidebar -->
+            <div class="booking-sidebar" data-aos="fade-left">
+                <div class="sb-price">UGX 280,000 <span>/ night</span></div>
+                <div class="sb-rating">
+                    <i class="fas fa-star"></i> <strong>4.9</strong> &nbsp;&middot;&nbsp; Airbnb listing
+                </div>
+
+                <div class="sb-dates">
+                    <div class="sb-date">
+                        <label for="sb-checkin">Check-in</label>
+                        <input type="date" id="sb-checkin">
+                    </div>
+                    <div class="sb-date">
+                        <label for="sb-checkout">Check-out</label>
+                        <input type="date" id="sb-checkout">
+                    </div>
+                </div>
+
+                <div class="sb-guests">
+                    <label for="sb-guests">Guests</label>
+                    <select id="sb-guests">
+                        <option value="1">1 guest</option>
+                        <option value="2" selected>2 guests</option>
+                        <option value="3">3 guests</option>
+                        <option value="4">4 guests</option>
+                    </select>
+                </div>
+
+                <button class="sb-btn" id="sidebarBookBtn">Reserve on Airbnb</button>
+                <p class="sb-note">You won't be charged yet — confirm on Airbnb</p>
+
+                <div class="sb-breakdown" id="sbBreakdown">
+                    <div class="sb-row">
+                        <span id="sb-rate-label">UGX 280,000 &times; 2 nights</span>
+                        <span id="sb-subtotal">UGX 560,000</span>
+                    </div>
+                    <div class="sb-row">
+                        <span>Airbnb service fee</span>
+                        <span style="color:var(--text-muted);font-size:0.8rem;">On Airbnb</span>
+                    </div>
+                    <div class="sb-row total">
+                        <span>Total before taxes</span>
+                        <span id="sb-total">UGX 560,000</span>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/256788661755?text=I'm%20interested%20in%20The%20Executive%20Retreat%20at%20Winnie%20Kaniz%20Apartments"
+                   target="_blank" class="sb-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Inquiry
+                </a>
+            </div>
+
+        </div><!-- end listing-body -->
+    </div><!-- end container -->
+
+    <!-- ── You May Also Like ── -->
+    <section class="also-like">
+        <div class="container">
+            <h2 class="section-title">You May Also Like</h2>
+            <div class="accent-line"></div>
+            <div class="also-cards">
+                <div class="also-card" data-aos="fade-up">
+                    <img src="../assets/images/apt1/3B3A0298.webp" alt="The Classic Suite">
+                    <div class="also-card-body">
+                        <h3>The Classic Suite</h3>
+                        <p>Cozy 2-bedroom apartment with marble-accented feature wall, Smart TV, and 24-hr power backup. Perfect for couples and small families.</p>
+                        <a href="apartment-1.html" class="btn btn-gold" style="font-size:0.75rem;padding:11px 24px;">View Details</a>
+                    </div>
+                </div>
+                <div class="also-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="../assets/images/apt2/3B3A0298.webp" alt="The Premier Residence">
+                    <div class="also-card-body">
+                        <h3>The Premier Residence</h3>
+                        <p>Spacious 2-bedroom apartment with a 55-inch screen and premium sound system. Ideal for business travelers and families.</p>
+                        <a href="apartment-2.html" class="btn btn-gold" style="font-size:0.75rem;padding:11px 24px;">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="../assets/images/logo.webp" alt="Winnie Kaniz Logo">
+                    </div>
+                    <p>Winnie Kaniz Furnished Apartments – Comfort Redefined. Premium short and long-stay residences in the heart of Kampala.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html#home">Home</a></li>
+                        <li><a href="../index.html#apartments">Our Residences</a></li>
+                        <li><a href="../index.html#amenities">Amenities</a></li>
+                        <li><a href="../index.html#gallery">Gallery</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Bugolobi, Kampala, Uganda</li>
+                        <li><i class="fas fa-phone"></i> +256 788 661 755</li>
+                        <li><i class="fas fa-envelope"></i> Winniekaniz2026@yahoo.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Winnie Kaniz Furnished Apartments. All rights reserved. | Bugolobi, Kampala, Uganda
+                <span class="made-by">Made by <a href="https://blactec.ug" target="_blank">Blactec.ug</a></span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/256788661755?text=Hello%2C%20I%27m%20interested%20in%20The%20Executive%20Retreat" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        // Sticky Header & Mobile Menu
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+
+            const mobileToggle = document.getElementById('mobileToggle');
+            const nav = document.querySelector('nav');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => nav.classList.toggle('mobile-active'));
+                nav.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => nav.classList.remove('mobile-active'));
+                });
+            }
+        });
+
+        /* ── AOS ── */
+        AOS.init({ duration: 700, easing: 'ease-out', once: true, offset: 60 });
+
+        /* ── Gallery ── */
+        const GALLERY_IMAGES = [
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.44.webp',       title: 'Living Room' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.11.59.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.02.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.01.webp',       title: 'Master Bedroom' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.02 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.02 (2).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.03.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.04 (2).webp',   title: 'Guest Bedroom' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.05.webp',       title: 'Living Room' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.03 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.04.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.04 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.06.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.07.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.12.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.07 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.07 (2).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.08.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.08 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.10.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.10 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.11.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.12 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.12.webp',       title: 'Backyard' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.13.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.14.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.16.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.36.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.12.36 (1).webp',   title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.12 (1).webp',   title: 'Backyard' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.13.webp',       title: 'Interior' },
+            { href: '../assets/images/apt3/WhatsApp Image 2026-05-01 at 11.13.42.webp',       title: 'Interior' },
+        ];
+
+        function openGallery(startIndex) {
+            const lightbox = GLightbox({
+                elements: GALLERY_IMAGES.map(img => ({
+                    href: img.href,
+                    type: 'image',
+                    title: img.title,
+                    description: 'The Executive Retreat — Winnie Kaniz Apartments'
+                })),
+                startAt: startIndex,
+                touchNavigation: true,
+                loop: true,
+                autoplayVideos: false,
+            });
+            lightbox.open();
+        }
+
+        /* ── Sidebar date logic ── */
+        const ciEl  = document.getElementById('sb-checkin');
+        const coEl  = document.getElementById('sb-checkout');
+        const RATE  = 280000;
+
+        const toISO = d => d.toISOString().split('T')[0];
+        const today = new Date();
+        const day2  = new Date(today); day2.setDate(today.getDate() + 2);
+        ciEl.value  = toISO(today);
+        coEl.value  = toISO(day2);
+        ciEl.min    = toISO(today);
+        coEl.min    = toISO(day2);
+
+        function calcBreakdown() {
+            if (!ciEl.value || !coEl.value) return;
+            const nights = Math.round((new Date(coEl.value) - new Date(ciEl.value)) / 86400000);
+            if (nights < 1) return;
+            const sub = RATE * nights;
+            document.getElementById('sb-rate-label').textContent = `UGX ${RATE.toLocaleString()} × ${nights} night${nights > 1 ? 's' : ''}`;
+            document.getElementById('sb-subtotal').textContent   = `UGX ${sub.toLocaleString()}`;
+            document.getElementById('sb-total').textContent      = `UGX ${sub.toLocaleString()}`;
+            document.getElementById('sbBreakdown').style.display = 'block';
+        }
+
+        ciEl.addEventListener('change', () => {
+            const next = new Date(ciEl.value); next.setDate(next.getDate() + 1);
+            coEl.min = toISO(next);
+            if (coEl.value <= ciEl.value) coEl.value = toISO(next);
+            calcBreakdown();
+        });
+        coEl.addEventListener('change', calcBreakdown);
+        calcBreakdown();
+
+        /* ── Book button ── */
+        document.getElementById('sidebarBookBtn').addEventListener('click', () => {
+            if (!ciEl.value || !coEl.value || ciEl.value >= coEl.value) {
+                alert('Please select valid check-in and check-out dates.');
+                return;
+            }
+            const guests = document.getElementById('sb-guests').value;
+            window.open(
+                `https://www.airbnb.com/book/stays/1674021824983862337?check_in=${ciEl.value}&check_out=${coEl.value}&numberOfAdults=${guests}`,
+                '_blank', 'noopener'
+            );
+        });
+    </script>
+</body>
+</html>

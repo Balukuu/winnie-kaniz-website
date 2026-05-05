@@ -1092,7 +1092,7 @@ footer {
         justify-content: center;
         width: 100%;
     }
-    .logo img { height: 75px; }
+    .logo img { height: 55px; }
 
     .nav-links { display: none; }
 
@@ -1158,23 +1158,28 @@ footer {
         transform: translateY(-7px) rotate(-45deg);
     }
 
-    .nav-links a { color: var(--text-dark); font-size: 1.1rem; text-shadow: none; }
+    .nav-links a { color: var(--text-dark); font-size: 1.1rem; text-shadow: none; padding: 12px 24px; display: block; text-align: center; }
     
     .hero-content { padding-top: 100px; }
-    .hero-content h1 { font-size: 2.8rem; }
+    .hero-content h1 { font-size: 2.6rem; }
     .hero-btns { flex-direction: column; align-items: center; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .stat-item { border-right: none; border-bottom: 1px solid var(--border-grey); padding: 20px 0; }
+    .stat-item h3 { font-size: 1.8rem; }
     .residences-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .section-padding { padding: 70px 0; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .section-padding { padding: 60px 0; }
     .section-header h2 { font-size: 2.2rem; }
     .gallery-grid { grid-template-columns: 1fr; }
+
+    .testimonial-text { font-size: 1.25rem; margin-bottom: 20px; }
+    .testimonial-card i.quote-icon { font-size: 2rem; margin-bottom: 16px; }
+    .contact-info-card { padding: 30px 24px; }
 
     .nav-cta { order: 3; }
 
     .apt-hero { margin-top: 80px; }
-    .apt-hero h1 { font-size: 2.6rem !important; }
+    .apt-hero h1 { font-size: 2.4rem !important; }
 
     .booking-form {
         flex-direction: column;
@@ -1204,4 +1209,9 @@ footer {
     .hero-content h1 { font-size: 2.2rem; }
     .section-header h2 { font-size: 1.9rem; }
     .amenities-grid { grid-template-columns: 1fr; }
+    .section-padding { padding: 50px 0; }
+    .residence-img { height: 280px; }
+    .contact-info-card { padding: 24px 16px; }
+    .hero-video-wrapper { height: 50vh; }
+    .hero-content { padding-top: 60px; }
 }

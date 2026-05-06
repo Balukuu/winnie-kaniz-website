@@ -323,6 +323,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Gallery filter tabs
+    const filterBtns = document.querySelectorAll('.gallery-filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item[data-apt]');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            galleryItems.forEach(item => {
+                const match = filter === 'all' || item.dataset.apt === filter;
+                item.classList.toggle('hidden', !match);
+            });
+        });
+    });
+
     // Smooth Scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         if (anchor.id === 'navBookBtn') return; // skip — external link, managed separately

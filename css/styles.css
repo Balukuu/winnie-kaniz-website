@@ -1193,7 +1193,20 @@ footer {
     }
 
     .hero-container {
-        margin-top: 110px;
+        margin-top: 75px;
+    }
+    
+    .apt-hero {
+        margin-top: 75px;
+    }
+
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 24px;
+        z-index: 2147483647; /* Ensure it stays on top of everything */
     }
 
     .hero-video-wrapper {

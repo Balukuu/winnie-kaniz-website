@@ -983,6 +983,19 @@
             setSidebarLoading(false);
             showSidebarResult({ available, nights, perNight, currency, livePrice, checkIn, checkOut });
         }
+
+        /* ── Keep WhatsApp link in sync with selected dates ── */
+        function updateWhatsApp() {
+            const ci = ciEl.value, co = coEl.value;
+            const waBtn = document.querySelector('.sb-whatsapp');
+            if (!waBtn) return;
+            const base = "I'm interested in The Premier Residence at Winnie Kaniz Apartments";
+            const detail = ci && co ? `. Check-in: ${ci}, Check-out: ${co}` : '';
+            waBtn.href = `https://wa.me/256788661755?text=${encodeURIComponent(base + detail)}`;
+        }
+        ciEl.addEventListener('change', updateWhatsApp);
+        coEl.addEventListener('change', updateWhatsApp);
+        updateWhatsApp();
     </script>
 </body>
 </html>

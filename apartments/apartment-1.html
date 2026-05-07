@@ -553,7 +553,7 @@
                             </div>
                         </div>
                         <div class="room-card" data-aos="fade-up" data-aos-delay="100">
-                            <img src="../assets/images/apt1/3B3A0117-HDR.webp" alt="Guest Bedroom" onclick="openGallery(6)" style="cursor:pointer;">
+                            <img src="../assets/images/apt1/3B3A0117-HDR.webp" alt="Guest Bedroom" onclick="openGallery(7)" style="cursor:pointer;">
                             <div class="room-body">
                                 <div class="room-label">Bedroom 2</div>
                                 <div class="room-name">Guest Bedroom</div>
@@ -972,6 +972,19 @@
             setSidebarLoading(false);
             showSidebarResult({ available, nights, perNight, currency, livePrice, checkIn, checkOut });
         }
+
+        /* ── Keep WhatsApp link in sync with selected dates ── */
+        function updateWhatsApp() {
+            const ci = ciEl.value, co = coEl.value;
+            const waBtn = document.querySelector('.sb-whatsapp');
+            if (!waBtn) return;
+            const base = "I'm interested in The Classic Suite at Winnie Kaniz Apartments";
+            const detail = ci && co ? `. Check-in: ${ci}, Check-out: ${co}` : '';
+            waBtn.href = `https://wa.me/256788661755?text=${encodeURIComponent(base + detail)}`;
+        }
+        ciEl.addEventListener('change', updateWhatsApp);
+        coEl.addEventListener('change', updateWhatsApp);
+        updateWhatsApp();
     </script>
 </body>
 </html>

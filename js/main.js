@@ -135,7 +135,7 @@ function showResult({ available, nights, perNight, currency, livePrice, listingI
         <br>${source}`;
 
     const airbnbUrl = `https://www.airbnb.com/rooms/${listingId}?check_in=${checkIn}&check_out=${checkOut}`;
-    bookBtn.onclick = () => window.open(airbnbUrl, '_blank', 'noopener');
+    bookBtn.href = airbnbUrl;
     bookBtn.style.display = 'inline-flex';
 }
 
@@ -323,6 +323,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Contact form → WhatsApp
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value.trim();
+            const apt  = document.getElementById('contactApt').value;
+            const msg  = document.getElementById('contactMsg').value.trim();
+            if (!name || !msg) return;
+            const text = encodeURIComponent(`Hi, I'm ${name}.\nApartment interest: ${apt}\n\n${msg}`);
+            window.open(`https://wa.me/256788661755?text=${text}`, '_blank', 'noopener');
+        });
+    }
+
     // Gallery filter tabs
     const filterBtns = document.querySelectorAll('.gallery-filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item[data-apt]');
@@ -340,7 +354,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Smooth Scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        if (anchor.id === 'navBookBtn') return; // skip — external link, managed separately
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
             if (!targetId || !targetId.startsWith('#')) return;

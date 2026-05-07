@@ -323,6 +323,7 @@
             margin-bottom: 10px;
         }
         .sb-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(172,137,62,0.52); }
+        .sb-btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none !important; box-shadow: 0 4px 18px rgba(172,137,62,0.38); }
         .sb-note { text-align: center; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 18px; }
         .sb-breakdown { border-top: 1px solid #ebebeb; padding-top: 16px; display: none; }
         .sb-row {
@@ -660,22 +661,17 @@
                     </select>
                 </div>
 
-                <button class="sb-btn" id="sidebarBookBtn">Reserve on Airbnb</button>
-                <p class="sb-note">You won't be charged yet — confirm on Airbnb</p>
+                <button class="sb-btn" id="sbCheckBtn" onclick="checkSidebarAvailability()">
+                    <span id="sbBtnText">Check Availability</span>
+                    <span id="sbBtnSpinner" style="display:none;"><i class="fas fa-spinner fa-spin"></i>&nbsp; Checking…</span>
+                </button>
 
-                <div class="sb-breakdown" id="sbBreakdown">
-                    <div class="sb-row">
-                        <span id="sb-rate-label">UGX 280,000 &times; 2 nights</span>
-                        <span id="sb-subtotal">UGX 560,000</span>
-                    </div>
-                    <div class="sb-row">
-                        <span>Airbnb service fee</span>
-                        <span style="color:var(--text-muted);font-size:0.8rem;">On Airbnb</span>
-                    </div>
-                    <div class="sb-row total">
-                        <span>Total before taxes</span>
-                        <span id="sb-total">UGX 560,000</span>
-                    </div>
+                <div id="sbAvailResult" style="display:none; margin-top:14px; padding:16px 18px; border-radius:9px; border:1.5px solid #ebebeb; background:#fafaf8;">
+                    <div id="sbAvailStatus" class="avail-status" style="font-size:0.88rem; margin-bottom:8px;"></div>
+                    <div id="sbAvailPricing" style="font-size:0.84rem; color:#555; line-height:1.65;"></div>
+                    <button id="sbBookBtn" class="sb-btn" style="display:none; margin-top:12px; margin-bottom:0;">
+                        Book on Airbnb &nbsp;<i class="fas fa-external-link-alt" style="font-size:0.78rem;"></i>
+                    </button>
                 </div>
 
                 <a href="https://wa.me/256788661755?text=I'm%20interested%20in%20The%20Executive%20Retreat%20at%20Winnie%20Kaniz%20Apartments"
@@ -872,51 +868,122 @@
             lightbox.open();
         }
 
-        /* ── Sidebar date logic ── */
+        /* ── Availability check config ── */
+        const APT_LISTING_ID = '1674021824983862337';
+        const APT_ICAL_URL   = '';
+        const APT_RATE       = 280000;
+        const APT_CURRENCY   = 'UGX';
+        const CORS_PROXY     = 'https://corsproxy.io/?url=';
+
+        /* ── Date initialisation ── */
         const ciEl  = document.getElementById('sb-checkin');
         const coEl  = document.getElementById('sb-checkout');
-        const RATE  = 280000;
-
         const toISO = d => d.toISOString().split('T')[0];
         const today = new Date();
         const day2  = new Date(today); day2.setDate(today.getDate() + 2);
-        ciEl.value  = toISO(today);
-        coEl.value  = toISO(day2);
-        ciEl.min    = toISO(today);
-        coEl.min    = toISO(day2);
-
-        function calcBreakdown() {
-            if (!ciEl.value || !coEl.value) return;
-            const nights = Math.round((new Date(coEl.value) - new Date(ciEl.value)) / 86400000);
-            if (nights < 1) return;
-            const sub = RATE * nights;
-            document.getElementById('sb-rate-label').textContent = `UGX ${RATE.toLocaleString()} × ${nights} night${nights > 1 ? 's' : ''}`;
-            document.getElementById('sb-subtotal').textContent   = `UGX ${sub.toLocaleString()}`;
-            document.getElementById('sb-total').textContent      = `UGX ${sub.toLocaleString()}`;
-            document.getElementById('sbBreakdown').style.display = 'block';
-        }
-
+        ciEl.value = toISO(today); coEl.value = toISO(day2);
+        ciEl.min   = toISO(today); coEl.min   = toISO(day2);
         ciEl.addEventListener('change', () => {
             const next = new Date(ciEl.value); next.setDate(next.getDate() + 1);
             coEl.min = toISO(next);
             if (coEl.value <= ciEl.value) coEl.value = toISO(next);
-            calcBreakdown();
         });
-        coEl.addEventListener('change', calcBreakdown);
-        calcBreakdown();
 
-        /* ── Book button ── */
-        document.getElementById('sidebarBookBtn').addEventListener('click', () => {
-            if (!ciEl.value || !coEl.value || ciEl.value >= coEl.value) {
-                alert('Please select valid check-in and check-out dates.');
-                return;
+        /* ── iCal helpers ── */
+        function parseIcalBusy(icsText) {
+            const busy = [], lines = icsText.replace(/\r\n/g, '\n').split('\n');
+            let inEvent = false, dtStart = null, dtEnd = null;
+            for (const line of lines) {
+                if (line === 'BEGIN:VEVENT') { inEvent = true; dtStart = dtEnd = null; }
+                if (!inEvent) continue;
+                const val = l => l.includes(':') ? l.split(':').slice(1).join(':').trim().slice(0, 8) : null;
+                if (line.startsWith('DTSTART')) dtStart = val(line);
+                if (line.startsWith('DTEND'))   dtEnd   = val(line);
+                if (line === 'END:VEVENT' && dtStart && dtEnd) { busy.push({ start: dtStart, end: dtEnd }); inEvent = false; }
             }
-            const guests = document.getElementById('sb-guests').value;
-            window.open(
-                `https://www.airbnb.com/book/stays/1674021824983862337?check_in=${ciEl.value}&check_out=${coEl.value}&numberOfAdults=${guests}`,
-                '_blank', 'noopener'
-            );
-        });
+            return busy;
+        }
+        function toCompact(s) { return s.replace(/-/g, ''); }
+        function datesAvailable(busy, ci, co) {
+            const a = toCompact(ci), b = toCompact(co);
+            return !busy.some(({ start, end }) => start < b && end > a);
+        }
+        function nightsBetween(a, b) { return Math.round((new Date(b) - new Date(a)) / 86400000); }
+
+        async function fetchLivePrice(id, ci, co) {
+            const url  = `https://www.airbnb.com/rooms/${id}?check_in=${ci}&check_out=${co}&adults=1`;
+            const html = await (await fetch(CORS_PROXY + encodeURIComponent(url))).text();
+            const nd   = html.match(/<script id="__NEXT_DATA__" type="application\/json">([\s\S]*?)<\/script>/);
+            if (nd) {
+                try {
+                    const sections = JSON.parse(nd[1])?.props?.pageProps?.sections?.sections ?? [];
+                    for (const sec of sections) {
+                        const m = JSON.stringify(sec).match(/"displayPrice":\s*"([^"]+)"|"price":\s*\{\s*"amount":\s*([\d.]+).*?"currency":\s*"([^"]+)"/);
+                        if (m) return { perNight: parseFloat((m[1]||m[2]).replace(/[^\d.]/g,'')), currency: m[3]||APT_CURRENCY };
+                    }
+                } catch { /* fall through */ }
+            }
+            for (const re of [/"amount":([\d.]+),"amountFormatted":"[^"]*","currency":"([^"]+)"/, /"originalPrice":\{"amount":([\d.]+),"currency":"([^"]+)"\}/]) {
+                const m = html.match(re);
+                if (m) return { perNight: parseFloat(m[1]), currency: m[2]||APT_CURRENCY };
+            }
+            return null;
+        }
+
+        /* ── Sidebar UI ── */
+        function setSidebarLoading(on) {
+            document.getElementById('sbBtnText').style.display    = on ? 'none'   : '';
+            document.getElementById('sbBtnSpinner').style.display = on ? 'inline' : 'none';
+            document.getElementById('sbCheckBtn').disabled = on;
+        }
+        function showSidebarResult({ available, nights, perNight, currency, livePrice, checkIn, checkOut }) {
+            const card = document.getElementById('sbAvailResult');
+            const stat = document.getElementById('sbAvailStatus');
+            const pric = document.getElementById('sbAvailPricing');
+            const btn  = document.getElementById('sbBookBtn');
+            card.style.display = 'block';
+            if (!available) {
+                card.style.borderColor = '#f5c6cb'; card.style.background = '#fff5f5';
+                stat.className = 'avail-status unavailable'; stat.innerHTML = '✗ &nbsp;Not available for these dates';
+                pric.innerHTML = 'Try different dates or contact us via WhatsApp.';
+                btn.style.display = 'none'; return;
+            }
+            card.style.borderColor = '#c3e6cb'; card.style.background = '#f0fff4';
+            stat.className = 'avail-status available'; stat.innerHTML = '✓ &nbsp;Available!';
+            const total = perNight * nights;
+            const src   = livePrice
+                ? '<span style="font-size:0.77rem;color:#888;">Live Airbnb price · taxes may apply</span>'
+                : '<span style="font-size:0.77rem;color:#888;">Based on nightly rate · taxes may apply</span>';
+            pric.innerHTML = `<strong style="font-size:1.08rem;color:#1a1a1a;">${currency} ${total.toLocaleString()}</strong> total &nbsp;·&nbsp; ${currency} ${perNight.toLocaleString()} × ${nights} night${nights!==1?'s':''}<br>${src}`;
+            const guests = document.getElementById('sb-guests')?.value || 2;
+            btn.onclick = () => window.open(`https://www.airbnb.com/rooms/${APT_LISTING_ID}?check_in=${checkIn}&check_out=${checkOut}&adults=${guests}`, '_blank', 'noopener');
+            btn.style.display = 'block';
+        }
+
+        /* ── Main check ── */
+        async function checkSidebarAvailability() {
+            const checkIn = ciEl.value, checkOut = coEl.value;
+            document.getElementById('sbAvailResult').style.display = 'none';
+            if (!checkIn || !checkOut) { alert('Please select both check-in and check-out dates.'); return; }
+            if (checkIn >= checkOut)   { alert('Check-out must be after check-in.'); return; }
+            setSidebarLoading(true);
+            const nights = nightsBetween(checkIn, checkOut);
+            let available = true, perNight = APT_RATE, currency = APT_CURRENCY, livePrice = false;
+            if (APT_ICAL_URL) {
+                try {
+                    const ics = await (await fetch(CORS_PROXY + encodeURIComponent(APT_ICAL_URL))).text();
+                    available = datesAvailable(parseIcalBusy(ics), checkIn, checkOut);
+                } catch { /* assume available */ }
+            }
+            if (available) {
+                try {
+                    const live = await fetchLivePrice(APT_LISTING_ID, checkIn, checkOut);
+                    if (live && live.perNight > 0) { perNight = live.perNight; currency = live.currency||APT_CURRENCY; livePrice = true; }
+                } catch { /* use configured rate */ }
+            }
+            setSidebarLoading(false);
+            showSidebarResult({ available, nights, perNight, currency, livePrice, checkIn, checkOut });
+        }
     </script>
 </body>
 </html>

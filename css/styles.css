@@ -1423,6 +1423,16 @@ footer {
     .hero-content h1 {
         font-size: 2.2rem;
     }
+
+    /* Convert horizontal AOS animations to vertical on mobile to prevent right-side overflow */
+    [data-aos="fade-left"],
+    [data-aos="fade-right"] {
+        transform: translate3d(0, 40px, 0) !important;
+    }
+    [data-aos="fade-left"].aos-animate,
+    [data-aos="fade-right"].aos-animate {
+        transform: translate3d(0, 0, 0) !important;
+    }
 }
 
 @media (max-width: 480px) {

@@ -33,6 +33,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -1364,7 +1365,7 @@ footer {
 
     .nav-links a { color: var(--text-dark); font-size: 1.1rem; text-shadow: none; padding: 12px 24px; display: block; text-align: center; }
     
-    .hero-content { padding-top: 100px; }
+    .hero-content { left: 0; right: 0; transform: translateY(-50%); padding: 0 20px; }
     .hero-content h1 { font-size: 2.6rem; }
     .hero-btns { flex-direction: column; align-items: center; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1395,7 +1396,7 @@ footer {
     
     .booking-bar {
         margin-top: -20px;
-        padding: 20px;
+        padding: 20px 0;
     }
 
     .hero-container {
@@ -1435,5 +1436,5 @@ footer {
     .contact-info-card { padding: 24px 20px; }
     .contact-form-card { padding: 24px 20px; }
     .hero-video-wrapper { height: 50vh; }
-    .hero-content { padding-top: 60px; }
+    .hero-content { padding: 0 20px; }
 }

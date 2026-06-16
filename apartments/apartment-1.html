@@ -14,7 +14,7 @@
 
     <style>
         /* ── Reset / base ── */
-        body { background: #fff; }
+        body { background: var(--white); }
 
         /* ── Photo grid ── */
         .photo-section { margin-top: 130px; }
@@ -110,7 +110,7 @@
         .photo-modal-back:hover { background: #f0f0f0; }
         .photo-modal-info { text-align: center; }
         .photo-modal-info h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1.05rem; color: #1a1a1a; margin-bottom: 2px;
         }
         .photo-modal-info span { font-size: 0.76rem; color: #8c8c8c; }
@@ -157,7 +157,7 @@
         .breadcrumb a { color: var(--text-muted); text-decoration: underline; }
         .breadcrumb a:hover { color: var(--text-dark); }
         .listing-title {
-            font-family: 'Playfair Display', serif; font-size: 2.2rem;
+            font-family: 'Cormorant Garamond', serif; font-size: 2.2rem;
             font-weight: 600; color: var(--text-dark); margin-bottom: 14px;
         }
         .listing-meta {
@@ -199,7 +199,7 @@
         .section { padding: 36px 0; border-bottom: 1px solid #ebebeb; }
         .section:last-child { border-bottom: none; }
         .section h2 {
-            font-family: 'Playfair Display', serif; font-size: 1.45rem;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.45rem;
             font-weight: 600; margin-bottom: 18px; color: var(--text-dark);
         }
         .section p { font-size: 0.94rem; line-height: 1.85; color: #444; margin-bottom: 14px; }
@@ -248,7 +248,7 @@
             margin-top: 24px; padding: 18px 22px;
             background: #fafaf8; border: 1px solid #ebebeb; border-radius: 8px;
         }
-        .policy-box h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; margin-bottom: 7px; }
+        .policy-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; margin-bottom: 7px; }
         .policy-box p { font-size: 0.87rem; color: #555; margin: 0; line-height: 1.7; }
         .policy-box a { color: var(--accent-gold); text-decoration: underline; }
 
@@ -346,7 +346,7 @@
         /* ── Also Like ── */
         .also-like { background: #f9f8f6; padding: 80px 0; }
         .also-like .section-title {
-            text-align: center; font-family: 'Playfair Display', serif;
+            text-align: center; font-family: 'Cormorant Garamond', serif;
             font-size: 2rem; margin-bottom: 8px;
         }
         .also-like .accent-line { margin: 0 auto 46px; }
@@ -359,7 +359,7 @@
         .also-card:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
         .also-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
         .also-card-body { padding: 22px 24px 26px; }
-        .also-card-body h3 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 8px; }
+        .also-card-body h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; margin-bottom: 8px; }
         .also-card-body p { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 18px; line-height: 1.65; }
 
         /* ── Responsive ── */
@@ -426,7 +426,7 @@
             <div class="photo-grid-wrap">
                 <div class="photo-grid">
                     <div class="main-photo" onclick="openGallery(0)">
-                        <img src="../assets/images/apt1/3B3A0298.webp" alt="Living Room">
+                        <img src="../assets/images/apt1/3B3A0142.webp" alt="Living Room">
                     </div>
                     <div class="sub-grid">
                         <div class="sub-photo" onclick="openGallery(1)">
@@ -561,7 +561,7 @@
                             </div>
                         </div>
                         <div class="room-card" data-aos="fade-up" data-aos-delay="200">
-                            <img src="../assets/images/apt1/3B3A0298.webp" alt="Living Room" onclick="openGallery(0)" style="cursor:pointer;">
+                            <img src="../assets/images/apt1/3B3A0142.webp" alt="Living Room" onclick="openGallery(0)" style="cursor:pointer;">
                             <div class="room-body">
                                 <div class="room-label">Common Space</div>
                                 <div class="room-name">Living Room</div>
@@ -794,7 +794,7 @@
 
         /* ── Gallery ── */
         const GALLERY_IMAGES = [
-            { href: '../assets/images/apt1/3B3A0298.webp',            title: 'Living Room' },
+            { href: '../assets/images/apt1/3B3A0142.webp',            title: 'Living Room' },
             { href: '../assets/images/apt1/3B3A0065-HDR.webp',        title: 'Master Bedroom' },
             { href: '../assets/images/apt1/3B3A0153.webp',            title: 'Bedroom' },
             { href: '../assets/images/apt1/3B3A0134-HDR.webp',        title: 'Dining Area' },
@@ -804,16 +804,14 @@
             { href: '../assets/images/apt1/3B3A0117-HDR.webp',        title: 'Guest Bedroom' },
             { href: '../assets/images/apt1/3B3A0125.webp',            title: 'Guest Bedroom' },
             { href: '../assets/images/apt1/3B3A0140.webp',            title: 'Kitchen' },
-            { href: '../assets/images/apt1/3B3A0348.webp',            title: 'Kitchen' },
-            { href: '../assets/images/apt1/3B3A0362.webp',            title: 'Bedroom' },
-            { href: '../assets/images/apt1/3B3A0396-Enhanced-NR.webp',title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0420.webp',            title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0442.webp',            title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0449.webp',            title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0502.webp',            title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0529.webp',            title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0545.webp',            title: 'Interior' },
-            { href: '../assets/images/apt1/3B3A0555.webp',            title: 'Interior' },
+            { href: '../assets/images/apt1/3B3A0136.webp',            title: 'Kitchen' },
+            { href: '../assets/images/apt1/3B3A0145.webp',            title: 'Living Room' },
+            { href: '../assets/images/apt1/3B3A0146.webp',            title: 'Living Room' },
+            { href: '../assets/images/apt1/3B3A0077-HDR.webp',        title: 'Master Bedroom' },
+            { href: '../assets/images/apt1/3B3A0097-Enhanced-NR.webp',title: 'Bathroom' },
+            { href: '../assets/images/apt1/3B3A0115.webp',            title: 'Bathroom' },
+            { href: '../assets/images/apt1/3B3A0240.webp',            title: 'Laundry Area' },
+            { href: '../assets/images/apt1/3B3A0247.webp',            title: 'Building Exterior' },
         ];
 
         /* ── Photo Modal ── */

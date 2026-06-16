@@ -3,25 +3,61 @@
    Serena-Inspired White Luxury Aesthetic
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --white:            #FFFFFF;
-    --off-white:        #FAFAFA;
-    --light-grey:       #F5F5F5;
-    --border-grey:      #E8E8E8;
-    --text-dark:        #1A1A1A;
-    --text-body:        #4A4A4A;
-    --text-muted:       #8C8C8C;
-    --accent-gold:      #B8860B;
-    --accent-gold-light:#D4A843;
-    --accent-gold-pale: #F5ECD7;
-    --deep-charcoal:    #1C1C1C;
-    --overlay:          rgba(0, 0, 0, 0.45);
-    --transition:       all 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
-    --shadow-sm:        0 2px 4px rgba(0,0,0,0.02);
-    --shadow-md:        0 4px 15px rgba(0,0,0,0.05);
-    --shadow-lg:        0 15px 50px rgba(0,0,0,0.08);
+    /* Warm ivory neutrals — every neutral tinted toward the brass hue, never pure #fff/#000 */
+    --white:            oklch(0.992 0.004 90);   /* primary ivory surface */
+    --off-white:        oklch(0.978 0.006 88);
+    --light-grey:       oklch(0.957 0.009 86);   /* warm sand */
+    --border-grey:      oklch(0.903 0.010 84);
+    --text-dark:        oklch(0.265 0.018 60);   /* warm espresso ink */
+    --text-body:        oklch(0.430 0.016 62);
+    --text-muted:       oklch(0.580 0.014 66);
+
+    /* Aged brass accent — a brighter tone for fills/decoration, a deeper one for text on light (AA) */
+    --accent-gold:      oklch(0.660 0.090 78);   /* decorative brass */
+    --accent-gold-light:oklch(0.760 0.085 84);   /* champagne highlight */
+    --accent-gold-deep: oklch(0.520 0.092 68);   /* text-safe brass on ivory */
+    --accent-gold-pale: oklch(0.948 0.028 88);   /* pale champagne wash */
+
+    --deep-charcoal:    oklch(0.235 0.016 58);   /* warm near-black for dark surfaces */
+    --overlay:          oklch(0.20 0.02 60 / 0.45);
+
+    /* Motion — ease-out-quint, no bounce */
+    --ease-out:         cubic-bezier(0.22, 1, 0.36, 1);
+    --transition:       all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Warm-tinted, layered shadows */
+    --shadow-sm:        0 1px 2px oklch(0.30 0.02 60 / 0.05);
+    --shadow-md:        0 6px 24px oklch(0.30 0.02 60 / 0.07);
+    --shadow-lg:        0 26px 70px oklch(0.28 0.02 60 / 0.11);
+
+    /* Radius scale */
+    --r-xs: 2px;
+    --r-sm: 6px;
+    --r-md: 10px;
+    --r-lg: 16px;
+}
+
+::selection {
+    background: var(--accent-gold-pale);
+    color: var(--text-dark);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent-gold-deep);
+    outline-offset: 3px;
+    border-radius: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
 }
 
 * {
@@ -62,9 +98,10 @@ body::-webkit-scrollbar {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-weight: 500;
-    line-height: 1.2;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
     color: var(--text-dark);
 }
 
@@ -95,35 +132,35 @@ img {
 /* ── Buttons ── */
 .btn {
     display: inline-block;
-    padding: 14px 36px;
+    padding: 15px 38px;
     font-family: 'Inter', sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.16em;
     cursor: pointer;
     transition: var(--transition);
     border: none;
-    border-radius: 0;
+    border-radius: var(--r-xs);
 }
 
 .btn-gold {
-    background-color: var(--accent-gold);
+    background-color: var(--accent-gold-deep);
     color: var(--white);
 }
 .btn-gold:hover {
     background-color: var(--text-dark);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 14px 34px oklch(0.30 0.04 60 / 0.22);
 }
 
 .btn-outline {
     background-color: transparent;
-    border: 1.5px solid var(--accent-gold);
-    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold-deep);
+    color: var(--accent-gold-deep);
 }
 .btn-outline:hover {
-    background-color: var(--accent-gold);
+    background-color: var(--accent-gold-deep);
     color: var(--white);
 }
 
@@ -225,20 +262,20 @@ header.scrolled .nav-links a {
 }
 
 .nav-links a.btn-book-header {
-    background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+    background: var(--accent-gold-deep);
     color: var(--white) !important;
     padding: 13px 28px !important;
-    font-size: 0.72rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    border-radius: 6px;
+    border-radius: var(--r-xs);
     display: inline-block;
     line-height: 1;
     white-space: nowrap;
     transition: var(--transition);
     text-shadow: none;
-    box-shadow: 0 4px 18px rgba(172, 137, 62, 0.38);
+    box-shadow: 0 4px 16px oklch(0.52 0.092 68 / 0.30);
     margin-left: 8px;
 }
 
@@ -247,10 +284,10 @@ header.scrolled .nav-links a {
 }
 
 .nav-links a.btn-book-header:hover {
-    background: linear-gradient(135deg, #b8860b, var(--accent-gold));
+    background: var(--text-dark);
     color: var(--white) !important;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 26px rgba(172, 137, 62, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px oklch(0.30 0.04 60 / 0.28);
 }
 
 /* Mobile hamburger */
@@ -322,27 +359,33 @@ header.scrolled .mobile-toggle span {
 }
 
 .hero-content h1 {
-    font-size: 3.8rem;
+    font-size: 4.6rem;
     color: var(--white);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     font-weight: 600;
-    text-shadow: 0 2px 15px rgba(0,0,0,0.4); /* Added shadow for visibility */
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    text-shadow: 0 2px 24px oklch(0.15 0.02 60 / 0.45);
 }
 
 .hero-content .subheading {
     color: var(--accent-gold-light);
-    font-size: 0.9rem;
+    font-size: 0.82rem;
     text-transform: uppercase;
-    letter-spacing: 0.4em;
-    margin-bottom: 15px;
+    letter-spacing: 0.42em;
+    margin-bottom: 18px;
+    text-indent: 0.42em;
+    font-weight: 500;
 }
 
 .hero-content .description {
-    color: rgba(255,255,255,0.95);
+    color: oklch(0.98 0.005 90 / 0.94);
     font-size: 1.15rem;
-    max-width: 650px;
+    font-weight: 300;
+    max-width: 600px;
     margin: 0 auto;
-    text-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    line-height: 1.7;
+    text-shadow: 0 1px 8px oklch(0.15 0.02 60 / 0.35);
 }
 
 /* Booking Bar */
@@ -503,9 +546,9 @@ header.scrolled .mobile-toggle span {
 .stat-item:last-child { border-right: none; }
 
 .stat-item h3 {
-    font-size: 2.2rem;
-    margin-bottom: 6px;
-    color: var(--accent-gold);
+    font-size: 2.7rem;
+    margin-bottom: 4px;
+    color: var(--accent-gold-deep);
     font-weight: 600;
 }
 
@@ -524,9 +567,10 @@ header.scrolled .mobile-toggle span {
 }
 
 .section-header h2 {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
     margin-bottom: 16px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: -0.015em;
 }
 
 .section-header .accent-line {
@@ -542,8 +586,9 @@ header.scrolled .mobile-toggle span {
 }
 
 .intro-text h2 {
-    font-size: 2.6rem;
+    font-size: 3rem;
     margin-bottom: 24px;
+    letter-spacing: -0.015em;
 }
 
 .intro-text p {
@@ -554,14 +599,23 @@ header.scrolled .mobile-toggle span {
 }
 
 .intro-text blockquote {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.5rem;
-    color: var(--accent-gold);
-    margin: 28px 0;
-    border-left: 2px solid var(--accent-gold);
-    padding-left: 24px;
-    line-height: 1.5;
+    font-size: 1.95rem;
+    color: var(--accent-gold-deep);
+    margin: 34px 0;
+    padding-top: 26px;
+    line-height: 1.4;
+    position: relative;
+}
+.intro-text blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 46px;
+    height: 1.5px;
+    background: var(--accent-gold);
 }
 
 .intro-img img {
@@ -593,16 +647,16 @@ header.scrolled .mobile-toggle span {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-light));
+    height: 2px;
+    background: var(--accent-gold);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s ease;
+    transition: transform 0.55s var(--ease-out);
 }
 .residence-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-    border-color: var(--accent-gold-light);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: oklch(0.76 0.085 84 / 0.6);
 }
 .residence-card:hover::after {
     transform: scaleX(1);
@@ -639,15 +693,16 @@ header.scrolled .mobile-toggle span {
     position: absolute;
     top: 16px;
     right: 16px;
-    background-color: var(--white);
-    color: var(--accent-gold);
-    padding: 5px 14px;
+    background-color: oklch(0.99 0.004 90 / 0.92);
+    backdrop-filter: blur(4px);
+    color: var(--accent-gold-deep);
+    padding: 6px 14px;
     font-size: 0.62rem;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.14em;
-    border: 1px solid var(--accent-gold);
-    border-radius: 2px;
+    border: 1px solid oklch(0.66 0.090 78 / 0.45);
+    border-radius: var(--r-xs);
     z-index: 2;
 }
 
@@ -658,8 +713,9 @@ header.scrolled .mobile-toggle span {
     flex: 1;
 }
 .residence-content h3 {
-    font-size: 1.45rem;
-    margin-bottom: 10px;
+    font-size: 1.75rem;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
 }
 .residence-content p {
     color: var(--text-muted);
@@ -677,10 +733,10 @@ header.scrolled .mobile-toggle span {
 .residence-feature-tag {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     background: var(--accent-gold-pale);
-    color: var(--accent-gold);
-    padding: 4px 11px;
+    color: var(--text-dark);
+    padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 500;
@@ -688,6 +744,7 @@ header.scrolled .mobile-toggle span {
 }
 .residence-feature-tag i {
     font-size: 0.62rem;
+    color: var(--accent-gold-deep);
 }
 
 .residence-footer {
@@ -701,7 +758,7 @@ header.scrolled .mobile-toggle span {
 }
 
 .residence-price {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-size: 1rem;
     color: var(--text-dark);
     display: block;
@@ -913,10 +970,10 @@ header.scrolled .mobile-toggle span {
 }
 
 .testimonial-text {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
     font-style: italic;
-    font-size: 1.6rem;
-    line-height: 1.5;
+    font-size: 2.1rem;
+    line-height: 1.4;
     margin-bottom: 28px;
     color: var(--text-dark);
 }
@@ -959,9 +1016,10 @@ header.scrolled .mobile-toggle span {
     z-index: 1;
 }
 .booking-banner h2 {
-    font-size: 3.2rem;
+    font-size: 3.7rem;
     margin-bottom: 20px;
     color: var(--white);
+    letter-spacing: -0.015em;
 }
 .booking-banner p {
     font-size: 1.1rem;

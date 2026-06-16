@@ -390,11 +390,31 @@
 </head>
 <body>
 
+    <!-- Preloader / Splash Screen -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <img src="../assets/images/winnie-logo.jpeg" alt="Winnie Kaniz" class="preloader-logo">
+        </div>
+    </div>
+    <script>
+        (function () {
+            var p = document.getElementById('preloader');
+            if (!p) return;
+            var start = Date.now(), MIN = 800;
+            function hide() {
+                setTimeout(function () { p.classList.add('loaded'); },
+                    Math.max(0, MIN - (Date.now() - start)));
+            }
+            window.addEventListener('load', hide);
+            setTimeout(hide, 4000); // safety: never hang
+        })();
+    </script>
+
     <!-- Header / Nav -->
     <header>
         <div class="container">
             <nav>
-                <div class="mobile-toggle" id="mobileToggle">
+                <div class="mobile-toggle" id="mobileToggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinksLeft navLinksRight">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -771,7 +791,7 @@
     </footer>
 
     <!-- WhatsApp Float -->
-    <a href="https://wa.me/256788661755?text=Hello%2C%20I%27m%20interested%20in%20The%20Classic%20Suite" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/256788661755?text=Hello%2C%20I%27m%20interested%20in%20The%20Classic%20Suite" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -790,9 +810,19 @@
             const mobileToggle = document.getElementById('mobileToggle');
             const nav = document.querySelector('nav');
             if (mobileToggle) {
-                mobileToggle.addEventListener('click', () => nav.classList.toggle('mobile-active'));
+                const setMenu = open => {
+                    nav.classList.toggle('mobile-active', open);
+                    mobileToggle.setAttribute('aria-expanded', String(open));
+                };
+                mobileToggle.addEventListener('click', () => setMenu(!nav.classList.contains('mobile-active')));
+                mobileToggle.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMenu(!nav.classList.contains('mobile-active')); }
+                });
                 nav.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => nav.classList.remove('mobile-active'));
+                    link.addEventListener('click', () => setMenu(false));
+                });
+                document.addEventListener('keydown', e => {
+                    if (e.key === 'Escape' && nav.classList.contains('mobile-active')) setMenu(false);
                 });
             }
         });
@@ -872,7 +902,7 @@
         /* ── Date initialisation ── */
         const ciEl  = document.getElementById('sb-checkin');
         const coEl  = document.getElementById('sb-checkout');
-        const toISO = d => d.toISOString().split('T')[0];
+        const toISO = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
         const today = new Date();
         const day2  = new Date(today); day2.setDate(today.getDate() + 2);
         ciEl.value = toISO(today); coEl.value = toISO(day2);

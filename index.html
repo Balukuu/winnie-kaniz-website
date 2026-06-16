@@ -48,11 +48,31 @@
 </head>
 <body>
 
+    <!-- Preloader / Splash Screen -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <img src="assets/images/winnie-logo.jpeg" alt="Winnie Kaniz" class="preloader-logo">
+        </div>
+    </div>
+    <script>
+        (function () {
+            var p = document.getElementById('preloader');
+            if (!p) return;
+            var start = Date.now(), MIN = 800;
+            function hide() {
+                setTimeout(function () { p.classList.add('loaded'); },
+                    Math.max(0, MIN - (Date.now() - start)));
+            }
+            window.addEventListener('load', hide);
+            setTimeout(hide, 4000); // safety: never hang
+        })();
+    </script>
+
     <!-- Header / Nav -->
     <header>
         <div class="container">
             <nav>
-                <div class="mobile-toggle" id="mobileToggle">
+                <div class="mobile-toggle" id="mobileToggle" role="button" tabindex="0" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinksLeft navLinksRight">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -144,7 +164,7 @@
         <div class="container">
             <div class="stats-grid">
                 <div class="stat-item">
-                    <h3 data-target="3">0</h3>
+                    <h3 data-target="4">0</h3>
                     <p>Luxury Residences</p>
                 </div>
                 <div class="stat-item">
@@ -170,7 +190,7 @@
                 <div class="intro-text" data-aos="fade-right">
                     <h2>The Winnie Kaniz Experience</h2>
                     <div class="accent-line" style="margin: 0 0 28px 0;"></div>
-                    <p>At Winnie Kaniz, we believe your living space should be a sanctuary. Each of our three furnished apartments has been meticulously designed with stylish furnishings, warm textures, and all the conveniences of home.</p>
+                    <p>At Winnie Kaniz, we believe your living space should be a sanctuary. Each of our four furnished apartments has been meticulously designed with stylish furnishings, warm textures, and all the conveniences of home.</p>
                     <blockquote>"It's not just where you stay — it's how you feel."</blockquote>
                     <p>Whether you're a business executive, a diplomat, or a leisure traveler, we provide a private urban retreat where every detail tells a story of comfort and sophistication.</p>
                 </div>
@@ -587,7 +607,7 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/256788661755?text=Hello%2C%20I%27m%20interested%20in%20booking%20a%20Winnie%20Kaniz%20Furnished%20Apartment" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/256788661755?text=Hello%2C%20I%27m%20interested%20in%20booking%20a%20Winnie%20Kaniz%20Furnished%20Apartment" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 

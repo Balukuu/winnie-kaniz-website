@@ -202,15 +202,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('nav');
     
     if (mobileToggle) {
+        const setMenu = open => {
+            nav.classList.toggle('mobile-active', open);
+            mobileToggle.setAttribute('aria-expanded', String(open));
+        };
         mobileToggle.addEventListener('click', () => {
-            nav.classList.toggle('mobile-active');
+            setMenu(!nav.classList.contains('mobile-active'));
         });
-        
+        // Keyboard support (Enter / Space) for the focusable toggle
+        mobileToggle.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setMenu(!nav.classList.contains('mobile-active'));
+            }
+        });
         // Close mobile menu when a link is clicked
         nav.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('mobile-active');
-            });
+            link.addEventListener('click', () => setMenu(false));
+        });
+        // Close on Escape
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && nav.classList.contains('mobile-active')) setMenu(false);
         });
     }
 
@@ -289,7 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const checkOutEl = document.getElementById('checkOut');
     if (checkInEl && checkOutEl) {
         const today = new Date();
-        const fmt = d => d.toISOString().split('T')[0];
+        // Format as local YYYY-MM-DD (toISOString() uses UTC and can roll back a day in UTC+ zones)
+        const fmt = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
         const twoDaysLater = new Date(today); twoDaysLater.setDate(today.getDate() + 2);
         checkInEl.value  = fmt(today);
         checkOutEl.value = fmt(twoDaysLater);
@@ -331,11 +344,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', e => {
             e.preventDefault();
-            const name = document.getElementById('contactName').value.trim();
-            const apt  = document.getElementById('contactApt').value;
-            const msg  = document.getElementById('contactMsg').value.trim();
+            const name  = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const apt   = document.getElementById('contactApt').value;
+            const msg   = document.getElementById('contactMsg').value.trim();
             if (!name || !msg) return;
-            const text = encodeURIComponent(`Hi, I'm ${name}.\nApartment interest: ${apt}\n\n${msg}`);
+            const emailLine = email ? `\nEmail: ${email}` : '';
+            const text = encodeURIComponent(`Hi, I'm ${name}.${emailLine}\nApartment interest: ${apt}\n\n${msg}`);
             window.open(`https://wa.me/256788661755?text=${text}`, '_blank', 'noopener');
         });
     }

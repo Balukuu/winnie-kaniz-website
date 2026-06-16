@@ -3,6 +3,7 @@ const AIRBNB_LISTINGS = {
     classic:   '1542437708058109816',
     premier:   '1674038645436000786',
     executive: '1674021824983862337',
+    sanctuary: '1666180399004248477',
 };
 
 // Paste the .ics export URL from Airbnb host dashboard → Calendar → Export Calendar
@@ -10,6 +11,7 @@ const AIRBNB_ICAL = {
     classic:   '',
     premier:   '',
     executive: '',
+    sanctuary: '',
 };
 
 // ── YOUR ACTUAL AIRBNB NIGHTLY RATES ─────────────────────────────────────────
@@ -19,6 +21,7 @@ const NIGHTLY_RATES = {
     classic:   150000,   // UGX — The Classic Suite
     premier:   220000,   // UGX — The Premier Residence
     executive: 280000,   // UGX — The Executive Retreat
+    sanctuary: 120000,   // UGX — The Urban Sanctuary (fallback; live Airbnb price overrides)
 };
 const CURRENCY = 'UGX';
 

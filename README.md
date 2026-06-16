@@ -14,7 +14,7 @@ A premium, production-ready website for Winnie Kaniz Furnished Apartments in Bug
     - Scroll-triggered animations (AOS.js).
     - Modern image sliders (Swiper.js) and lightboxes (GLightbox).
     - Floating WhatsApp button with pulse animation.
-- **Airbnb Integration**: Direct booking links for all three apartments.
+- **Airbnb Integration**: Direct booking links for all four apartments.
 
 ## Technology Stack
 - HTML5, CSS3 (Vanilla)
@@ -39,7 +39,7 @@ A premium, production-ready website for Winnie Kaniz Furnished Apartments in Bug
 
 ## Contact & Booking
 - **WhatsApp**: +256 788 661 755
-- **Email**: Winniekaniz2026@yahoo.com
+- **Email**: booking@kanizapartments.co.ug
 - **Airbnb**: [Joseph M (Host Profile)](https://www.airbnb.com/users/show/JosephM)
 
 ---

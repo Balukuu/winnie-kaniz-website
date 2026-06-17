@@ -18,12 +18,12 @@ const AIRBNB_ICAL = {
 // Update these to match exactly what Airbnb shows on each listing.
 // These are shown directly — no "estimated" label.
 const NIGHTLY_RATES = {
-    classic:   200000,   // UGX — The Classic Suite
-    premier:   220000,   // UGX — The Premier Residence
-    executive: 190000,   // UGX — The Executive Retreat
-    sanctuary: 160000,   // UGX — The Urban Sanctuary (fallback; live Airbnb price overrides)
+    classic:   55,   // USD — The Classic Suite
+    premier:   60,   // USD — The Premier Residence
+    executive: 52,   // USD — The Executive Retreat
+    sanctuary: 45,   // USD — The Urban Sanctuary (fallback; live Airbnb price overrides)
 };
-const CURRENCY = 'UGX';
+const CURRENCY = 'USD';
 
 const CORS_PROXY = 'https://corsproxy.io/?url=';
 

@@ -1118,6 +1118,30 @@ header.scrolled .mobile-toggle span {
     opacity: 0.9;
     font-weight: 300;
 }
+.perk-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: -8px auto 36px;
+    padding: 12px 24px;
+    border: 1px solid var(--accent-gold-light);
+    border-radius: 50px;
+    background: rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(4px);
+    color: var(--white);
+    font-size: 0.98rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    max-width: 90%;
+}
+.perk-pill i {
+    color: var(--accent-gold-light);
+    font-size: 1.15rem;
+    flex: 0 0 auto;
+}
+@media (max-width: 600px) {
+    .perk-pill { font-size: 0.88rem; padding: 11px 18px; }
+}
 
 /* ── Contact Section ── */
 .contact-section {

@@ -1,6 +1,6 @@
-# Winnie Kaniz Furnished Apartments - Website
+# Kaniz Furnished Apartments - Website
 
-A premium, production-ready website for Winnie Kaniz Furnished Apartments in Bugolobi, Kampala, Uganda. Designed for high conversion and a luxury guest experience.
+A premium, production-ready website for Kaniz Furnished Apartments in Bugolobi, Kampala, Uganda. Designed for high conversion and a luxury guest experience.
 
 ## Features
 - **Premium Aesthetic**: Inspired by high-end hospitality brands, featuring full-bleed cinematic photography and elegant typography.
@@ -43,4 +43,4 @@ A premium, production-ready website for Winnie Kaniz Furnished Apartments in Bug
 - **Airbnb**: [Joseph M (Host Profile)](https://www.airbnb.com/users/show/JosephM)
 
 ---
-*Created for Winnie Kaniz Furnished Apartments - May 2026*
+*Created for Kaniz Furnished Apartments - May 2026*
